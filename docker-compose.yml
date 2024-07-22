@@ -1,0 +1,7 @@
+services:
+  go-cli-template:
+    container_name: go-cli-template
+    image: ghcr.io/opslabhqx/go-cli-template:latest
+    build:
+      context: .
+      dockerfile: Dockerfile
