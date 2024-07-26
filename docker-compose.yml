@@ -1,3 +1,4 @@
+---
 services:
   go-cli-template:
     container_name: go-cli-template

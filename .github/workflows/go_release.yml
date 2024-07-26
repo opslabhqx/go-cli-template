@@ -1,3 +1,4 @@
+---
 name: Go release
 
 on:
@@ -26,22 +27,22 @@ jobs:
             goos: windows
 
     steps:
-    - uses: actions/checkout@v4
-    - name: Set up Go
-      uses: actions/setup-go@v4
-      with:
-        go-version: '1.18'
+      - uses: actions/checkout@v4
+      - name: Set up Go
+        uses: actions/setup-go@v4
+        with:
+          go-version: '1.18'
 
-    - name: Get tag version
-      id: get_version
-      run: echo "VERSION=${GITHUB_REF#refs/tags/}" | sed 's/^v//' >> $GITHUB_ENV
+      - name: Get tag version
+        id: get_version
+        run: echo "VERSION=${GITHUB_REF#refs/tags/}" | sed 's/^v//' >> $GITHUB_ENV
 
-    - name: Build and Release
-      uses: wangyoucao577/go-release-action@v1
-      with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        goos: ${{ matrix.goos }}
-        goarch: ${{ matrix.goarch }}
-        project_path: "./app"
-        binary_name: "go-cli"
-        ldflags: "-X 'go-cli/app/internal/config/base.VERSION=${{ env.VERSION }}'"
+      - name: Build and Release
+        uses: wangyoucao577/go-release-action@v1
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          goos: ${{ matrix.goos }}
+          goarch: ${{ matrix.goarch }}
+          project_path: "./app"
+          binary_name: "go-cli"
+          ldflags: "-X 'go-cli/app/internal/config/base.VERSION=${{ env.VERSION }}'"
