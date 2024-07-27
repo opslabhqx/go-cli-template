@@ -46,3 +46,9 @@ jobs:
           project_path: "./app"
           binary_name: "go-cli"
           ldflags: "-X 'go-cli/app/internal/config/base.VERSION=${{ env.VERSION }}'"
+
+      - name: Run Slack Notification
+        if: always()
+        uses: opslabhqx/action-slacknotify@v1
+        with:
+          webhook_url: ${{ secrets.SLACK_WEBHOOK_URL }}
